@@ -6,3 +6,30 @@ datasource db {
   provider = "sqlite"
   url      = "file:./dev.db"
 }
+
+model news {
+  id Int @id @default(autoincrement()) @map("id_news")
+  title String
+  content String
+}
+
+model News {
+  id Int @id @default(autoincrement()) @map("id_news")
+  title String
+  content String
+}
+
+model Homework {
+  id Int @id @default(autoincrement()) @map("id_homework")
+  title String
+  description String
+  subject Subject @relation(fields: [id_subject], references: [id])
+  id_subject Int
+  status Boolean
+}
+
+model Subject {
+  id Int @id @default(autoincrement()) @map("id_subject")
+  name String
+  homework Homework[]
+}
