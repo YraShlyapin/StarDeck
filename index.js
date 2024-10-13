@@ -1,6 +1,10 @@
 import express from 'express'
-import cors from 'cors'
 import { PrismaClient } from '@prisma/client'
+
+import cors from 'cors'
+import bodyParser from 'body-parser'
+
+import router from './js/api.js'
 
 import 'dotenv/config'
 
@@ -10,26 +14,12 @@ const prisma = new PrismaClient()
 const port = process.env.PORT || 80
 
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
-// app.use(async (req, res) => {
-//     if (req.query.q == 1){
-//         await prisma.asd.createMany({
-//             data: [
-//             {name: '123'},
-//             {name: 'ss'},
-//             {name: 'asd'},
-//             {name: 'asd'},
-//             ]
-//         })
-//         res.send('created')
-//     } else {
-//         await prisma.asd.findMany()
-//         .then(o => {
-//             res.send(o)
-//         })
-//     }
-// })
+app.use('/api', router)
 
 app.listen(port, (err) => {
+    if (err) throw err
     console.log(`server started http://localhost:${port}`)
 })
