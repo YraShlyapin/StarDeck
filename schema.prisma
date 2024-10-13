@@ -7,12 +7,6 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model news {
-  id Int @id @default(autoincrement()) @map("id_news")
-  title String
-  content String
-}
-
 model News {
   id Int @id @default(autoincrement()) @map("id_news")
   title String
