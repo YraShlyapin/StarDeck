@@ -1,5 +1,4 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
 
 import cors from 'cors'
 import bodyParser from 'body-parser'
@@ -9,7 +8,6 @@ import router from './js/api.js'
 import 'dotenv/config'
 
 const app = express()
-const prisma = new PrismaClient()
 
 const port = process.env.PORT || 80
 

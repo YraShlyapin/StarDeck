@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "init": "npm i & npx prisma generate",
+    "db": "npx prisma db push",
     "start": "node ./index.js"
   },
   "author": "",
