@@ -13,11 +13,11 @@ newsRoute.post('/News', async (req, res) => {
         }) 
 } )
 
-newsRoute.get('/AllNews', async(req, res) => {
+newsRoute.get('/AllNews', async (req, res) => {
     await prisma.News.findMany() 
-    .then(o => {
-        res.status(200).send(o)
-    })
+        .then(o => {
+            res.status(200).send(o)
+        })
 })
 
 
@@ -35,7 +35,7 @@ newsRoute.route('/News/:id')
     .delete(async (req, res) => {
         await prisma.News.delete({
             where: {
-                id: Number(rew.params.id)
+                id: Number(req.params.id)
             }
         })
             .then(o => {

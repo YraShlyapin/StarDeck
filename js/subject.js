@@ -4,21 +4,21 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 const subjectRoute = express.Router()
 
-subjectRoute.post('/Subject', async(req, res) => {
+subjectRoute.post('/Subject', async (req, res) => {
     await prisma.Subject.create({
         data: req.body 
     }) 
-    .then(o => {
-        res.status(201).send(o)
-    })
+        .then(o => {
+            res.status(201).send(o)
+        })
 })
 
-subjectRoute.get('/AllSubjects', async(req, res) => {
+subjectRoute.get('/AllSubjects', async (req, res) => {
     await prisma.Subject.findMany({
     }) 
-    .then(o => {
-        res.status(200).send(o)
-    })
+        .then(o => {
+            res.status(200).send(o)
+        })
 })
 
 subjectRoute.route('/Subject/:id')
@@ -38,9 +38,9 @@ subjectRoute.route('/Subject/:id')
                 id: Number(req.params.id)
             }
         })
-        .then(o => {
-            res.status(200).send(o)
-        })
+            .then(o => {
+                res.status(200).send(o)
+            })
     })
 
 export default subjectRoute

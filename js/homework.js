@@ -11,7 +11,7 @@ homeworkRoute.post("/Homework", async (req, res) => {
         .then(o => res.send(o))
 })
 
-homeworkRoute.get('/AllHomeworks', async(req, res) => {
+homeworkRoute.get('/AllHomeworks', async (req, res) => {
     await prisma.Homework.findMany({
         include: {
             subject: {
@@ -21,9 +21,9 @@ homeworkRoute.get('/AllHomeworks', async(req, res) => {
             }
         }
     }) 
-    .then(o => {
-        res.status(200).send(o)
-    })
+        .then(o => {
+            res.status(200).send(o)
+        })
 })
 
 homeworkRoute.route('/Homework/:id')

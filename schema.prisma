@@ -3,27 +3,50 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./dev.db"
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+model User {
+  id     Int      @id @default(autoincrement()) @map("id_user")
+  name   String
+  role   Role     @default(USER)
+  Themes Themes[]
+}
+
+enum Role {
+  USER
+  HEADMAN
 }
 
 model News {
-  id Int @id @default(autoincrement()) @map("id_news")
-  title String
+  id      Int    @id @default(autoincrement()) @map("id_news")
+  title   String
   content String
 }
 
 model Homework {
-  id Int @id @default(autoincrement()) @map("id_homework")
-  title String
+  id          Int      @id @default(autoincrement()) @map("id_homework")
+  title       String
   description String
-  subject Subject @relation(fields: [id_subject], references: [id])
-  id_subject Int
-  status Boolean
+  subject     Subject  @relation(fields: [id_subject], references: [id])
+  id_subject  Int
+  status      Boolean  @default(false)
+  has_themes  Boolean  @default(false)
+  themes      Themes[]
 }
 
 model Subject {
-  id Int @id @default(autoincrement()) @map("id_subject")
-  name String
+  id       Int        @id @default(autoincrement()) @map("id_subject")
+  name     String
   homework Homework[]
+}
+
+model Themes {
+  id          Int      @id @default(autoincrement()) @map("id_themes")
+  title       String
+  id_homework Int
+  homework    Homework @relation(fields: [id_homework], references: [id])
+  id_user     Int?
+  coosen_user User?    @relation(fields: [id_user], references: [id])
 }
