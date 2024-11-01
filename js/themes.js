@@ -73,7 +73,7 @@ themesRoute.put('/SelectTheme', async (req, res) => {
         })
 })
 
-themesRoute.put('/DeselectThemes', async (req, res) => {
+themesRoute.put('/DeselectTheme', async (req, res) => {
     await prisma.Themes.update({
         where: {
             id: req.body.id_theme
@@ -87,26 +87,15 @@ themesRoute.put('/DeselectThemes', async (req, res) => {
         })
 })
 
-// themesRoute.route('/Themes/:id_homework')
-//     .get(async (req, res) => {
-//         await prisma.Themes.findFirst({
-//             where: {
-//                 id_homework: Number(req.params.id_homework)
-//             }
-//         })
-//             .then(o => {
-//                 res.status(200).send(o) 
-//             })
-//     })
-//     .delete(async (req, res) =>{
-//         await prisma.Themes.delete({
-//             where: {
-//                 id_homework: Number(req.params.id_homework)
-//             }
-//         })
-//             .then(o => {
-//                 res.status(200).send(o)
-//             })
-//     })
+themesRoute.get('/AllThemes/:id_homework', async (req, res) => {
+    await prisma.Themes.findFirst({
+        where: {
+            id_homework: Number(req.params.id_homework)
+        }
+    })
+        .then(o => {
+            res.status(200).send(o) 
+        })
+})
 
 export default themesRoute
