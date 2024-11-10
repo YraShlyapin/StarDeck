@@ -1,8 +1,8 @@
 import express from 'express'
-import homeworkRoute from './homework.js'
-import subjectRoute from './subject.js'
-import newsRoute from './news.js'
-import themesRoute from './themes.js'
+import homeworkRoute from './routes/homework.js'
+import subjectRoute from './routes/subject.js'
+import newsRoute from './routes/news.js'
+import themesRoute from './routes/themes.js'
 
 const router = express.Router()
 

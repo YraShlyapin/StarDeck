@@ -8,10 +8,11 @@ datasource db {
 }
 
 model User {
-  id     Int      @id @default(autoincrement()) @map("id_user")
-  name   String
-  role   Role     @default(USER)
-  Themes Themes[]
+  id      Int      @id @default(autoincrement()) @map("id_user")
+  name    String
+  chat_id Int      @unique
+  role    Role     @default(USER)
+  Themes  Themes[]
 }
 
 enum Role {
@@ -20,9 +21,10 @@ enum Role {
 }
 
 model News {
-  id      Int    @id @default(autoincrement()) @map("id_news")
-  title   String
-  content String
+  id             Int      @id @default(autoincrement()) @map("id_news")
+  title          String
+  content        String
+  published_data DateTime @default(now())
 }
 
 model Homework {
@@ -32,7 +34,6 @@ model Homework {
   subject     Subject  @relation(fields: [id_subject], references: [id])
   id_subject  Int
   status      Boolean  @default(false)
-  has_themes  Boolean  @default(false)
   themes      Themes[]
 }
 

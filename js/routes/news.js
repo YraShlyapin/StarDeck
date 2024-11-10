@@ -1,8 +1,10 @@
 import express from 'express'
 import { PrismaClient } from '@prisma/client'
+import { io } from 'socket.io-client'
 
 const prisma = new PrismaClient()
 const newsRoute = express.Router()
+const socket = io('ws://localhost:81')
 
 newsRoute.post('/News', async (req, res) => {
     await prisma.News.create({
@@ -14,7 +16,13 @@ newsRoute.post('/News', async (req, res) => {
 } )
 
 newsRoute.get('/AllNews', async (req, res) => {
-    await prisma.News.findMany() 
+    await prisma.News.findMany({
+        orderBy: [
+            {
+                published_data: 'desc'
+            }
+        ]
+    }) 
         .then(o => {
             res.status(200).send(o)
         })
