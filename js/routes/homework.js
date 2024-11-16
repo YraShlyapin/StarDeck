@@ -20,7 +20,7 @@ homeworkRoute.get('/AllHomeworks', async (req, res) => {
                 }
             }
         }
-    }) 
+    })
         .then(o => {
             res.status(200).send(o)
         })

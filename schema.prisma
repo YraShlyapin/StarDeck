@@ -9,8 +9,8 @@ datasource db {
 
 model User {
   id      Int      @id @default(autoincrement()) @map("id_user")
-  name    String
-  chat_id Int      @unique
+  name    String?
+  chat_id BigInt   @unique
   role    Role     @default(USER)
   Themes  Themes[]
 }
