@@ -23,16 +23,16 @@ app.use('/api', router)
 
 
 
-const io = new Server(port_socket)
+// const io = new Server(port_socket)
 
-io.on('connection', client => {
-    client.on('message', m => console.log(m))
-})
+// io.on('connection', client => {
+//     client.on('message', m => console.log(m))
+// })
 
 
 
 app.listen(port_api, (err) => {
     if (err) throw err
     console.log(`api started http://localhost:${port_api}`)
-    console.log(`ws started ws://localhost:${port_socket}`)
+    // console.log(`ws started ws://localhost:${port_socket}`)
 })

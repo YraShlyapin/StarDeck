@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id      Int      @id @default(autoincrement()) @map("id_user")
-  name    String?
-  chat_id BigInt   @unique
-  role    Role     @default(USER)
-  Themes  Themes[]
+  id              Int     @id @default(autoincrement()) @map("id_user")
+  name            String?
+  chat_id         BigInt  @unique
+  activity        Int     @default(0)
+  current_Subject Int?
+  role            Role    @default(USER)
+  // Themes   Themes[]
 }
 
 enum Role {
@@ -23,31 +25,33 @@ enum Role {
 model News {
   id             Int      @id @default(autoincrement()) @map("id_news")
   title          String
-  content        String
+  content        String   @db.LongText
   published_data DateTime @default(now())
 }
 
 model Homework {
-  id          Int      @id @default(autoincrement()) @map("id_homework")
-  title       String
-  description String
-  subject     Subject  @relation(fields: [id_subject], references: [id])
-  id_subject  Int
-  status      Boolean  @default(false)
-  themes      Themes[]
+  id             Int      @id @default(autoincrement()) @map("id_homework")
+  title          String
+  description    String
+  subject        Subject  @relation(fields: [id_subject], references: [id])
+  id_subject     Int
+  status         Boolean  @default(false)
+  published_data DateTime @default(now())
+  // themes      Themes[]
 }
 
 model Subject {
-  id       Int        @id @default(autoincrement()) @map("id_subject")
-  name     String
-  homework Homework[]
+  id           Int        @id @default(autoincrement()) @map("id_subject")
+  name         String
+  abbreviation String?
+  homework     Homework[]
 }
 
-model Themes {
-  id          Int      @id @default(autoincrement()) @map("id_themes")
-  title       String
-  id_homework Int
-  homework    Homework @relation(fields: [id_homework], references: [id])
-  id_user     Int?
-  coosen_user User?    @relation(fields: [id_user], references: [id])
-}
+// model Themes {
+//   id          Int      @id @default(autoincrement()) @map("id_themes")
+//   title       String
+//   id_homework Int
+//   homework    Homework @relation(fields: [id_homework], references: [id])
+//   id_user     Int?
+//   coosen_user User?    @relation(fields: [id_user], references: [id])
+// }

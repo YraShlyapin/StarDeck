@@ -19,7 +19,12 @@ homeworkRoute.get('/AllHomeworks', async (req, res) => {
                     name: true
                 }
             }
-        }
+        },
+        orderBy: [
+            {
+                published_data: 'desc'
+            }
+        ]
     })
         .then(o => {
             res.status(200).send(o)
@@ -57,5 +62,26 @@ homeworkRoute.route('/Homework/:id')
                 res.status(404)
             })
     })
+
+
+homeworkRoute.put('/changeStatus/:id', async (req, res) => {
+    let now = await prisma.Homework.findFirst({
+        where: {
+            id: Number(req.params.id)
+        }
+    })
+    
+    await prisma.Homework.update({
+        where: {
+            id: Number(req.params.id)
+        },
+        data: {
+            status: !now.status
+        }
+    })
+        .then(o => {
+            res.status(200).send(o)
+        })
+})
     
 export default homeworkRoute
