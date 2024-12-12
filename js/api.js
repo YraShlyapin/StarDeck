@@ -1,9 +1,16 @@
 import express from 'express'
-import { PrismaClient } from '@prisma/client'
+import homeworkRoute from './routes/homework.js'
+import subjectRoute from './routes/subject.js'
+import newsRoute from './routes/news.js'
+import themesRoute from './routes/themes.js'
+import userRoute from './routes/user.js'
 
-const prisma = new PrismaClient()
 const router = express.Router()
 
-//начинайте писать свой код здесь
+router.use(homeworkRoute)
+router.use(subjectRoute)
+router.use(newsRoute)
+router.use(themesRoute)
+router.use(userRoute)
 
 export default router
